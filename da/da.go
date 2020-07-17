@@ -24,8 +24,7 @@ func New(appID string, opts ...Option) *Client {
 		opt.apply(&copts)
 	}
 
-	rpcClient := jsonrpc.NewClient(APIEndpoint, appID)
-	rpcClient.Client = copts.httpClient
+	rpcClient := jsonrpc.NewClient(APIEndpoint, appID, jsonrpc.WithHTTPClient(copts.httpClient))
 
 	return &Client{
 		client: rpcClient,

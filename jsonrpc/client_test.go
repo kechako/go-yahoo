@@ -1,7 +1,6 @@
 package jsonrpc
 
 import (
-	"net/http"
 	"testing"
 )
 
@@ -20,23 +19,5 @@ func TestNewClient(t *testing.T) {
 
 	if client.appID != testAppID {
 		t.Errorf("Client.appID: got %s, want %s", client.appID, testAppID)
-	}
-
-	if client.httpClient() == nil {
-		t.Error("Client.httpClient() must not be nil")
-	}
-
-	if client.httpClient() != http.DefaultClient {
-		t.Error("Client.httpClient() must be http.DefaultClient")
-	}
-
-	var httpClient = &http.Client{}
-	client.Client = httpClient
-	if client.httpClient() == nil {
-		t.Error("Client.httpClient() must not be nil")
-	}
-
-	if client.httpClient() != httpClient {
-		t.Error("Client.httpClient() must not be http.DefaultClient")
 	}
 }
